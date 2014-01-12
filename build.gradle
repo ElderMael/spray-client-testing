@@ -1,0 +1,38 @@
+apply plugin: 'scala'
+apply plugin: 'application'
+
+applicationName = "app"
+mainClassName = "com.foo.Bar"
+
+version = '1.0'
+
+dependencies {
+
+    // Scala
+    compile 'org.scala-lang:scala-library:2.10.3'
+    compile 'io.spray:spray-client:1.2.0'
+    compile 'com.typesafe.akka:akka-actor_2.10:2.2.3'
+
+    // JUnit & ScalaTest
+    testCompile 'org.scalatest:scalatest_2.10:2.0'
+    testCompile 'junit:junit:4.+'
+
+
+}
+
+test.testLogging {
+    showStandardStreams = true
+}
+
+tasks.withType(ScalaCompile) {
+    scalaCompileOptions.useAnt = false
+}
+
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven {
+        url "http://repo.spray.io"
+    }
+}
